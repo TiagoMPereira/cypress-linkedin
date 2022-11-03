@@ -30,7 +30,7 @@ describe('Cenários de teste para página inicial e página de vagas do Linkedin
     cy.filterBR()
     cy.filterCheck(5)
     cy.selectFirst()
-    cy.get(':nth-child(1) > .description__job-criteria-text').should('contain.text', "Intership")
+    cy.get(':nth-child(1) > .description__job-criteria-text').should('contain.text', "Internship")
   })
 
   it('Teste - Cadastro falho', () => {
