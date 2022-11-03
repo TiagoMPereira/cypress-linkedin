@@ -25,7 +25,29 @@ describe('Cenários de teste para página inicial e página de vagas do Linkedin
     cy.get(':nth-child(2) > .description__job-criteria-text').should('contain.text', "Full-time")
   })
 
+  it('Teste - Buscando vaga estágio', () => {
+    cy.linkedinVagas()
+    cy.filterBR()
+    cy.filterCheck(5)
+    cy.selectFirst()
+    cy.get(':nth-child(1) > .description__job-criteria-text').should('contain.text', "Intership")
+  })
 
+  it('Teste - Cadastro falho', () => {
+    cy.linkedin()
+    cy.joinIn()
+    cy.enterCredentials('galileu@gmail.com', '123456')
+    cy.enterName('Galileu', 'Galilei')
+    cy.get('.toast__message').should('contain.text', 'Please enter a more secure password')
+  })
+
+  it('Teste - Login com username inválido', () => {
+    cy.linkedin()
+    cy.singIn()
+    cy.enterLoginCredentials('skjdhvuirhbg', '1324587')
+    cy.get('#error-for-username').should('contain.text', 'Please enter a valid username')
+  })
+  
 })
 
 // function criarUsuario(){
