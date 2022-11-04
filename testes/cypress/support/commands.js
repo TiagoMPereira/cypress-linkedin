@@ -72,6 +72,21 @@ Cypress.Commands.add('selectFirst', () => {
     cy.wait(1000)
 })
 
+// Verificar texto de resposta em inglês e português
+Cypress.Commands.add('checkTextLanguages', (element, ptbr, enus) => {
+    cy.get(element).invoke('text').then((text) => {
+        if (text.includes(enus)) {
+          cy.get(element).should('contain.text', enus)
+        }
+        else if (text.includes(ptbr)) {
+          cy.get(element).should('contain.text', ptbr)
+        }
+        else {
+          cy.get(element).should('contain.text', enus)
+        }
+      })
+})
+
 // Clicar na seção de cadastro 
 Cypress.Commands.add('joinIn', () => {
     cy.get('.nav__button-tertiary').click()
