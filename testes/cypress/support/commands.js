@@ -24,6 +24,11 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+// Acessar página 
+Cypress.Commands.add('linkedin', () => {
+    cy.visit('https://www.linkedin.com/')
+})
+
 // Acessar página de vagas
 Cypress.Commands.add('linkedinVagas', () => {
     cy.visit('https://www.linkedin.com/')
@@ -64,5 +69,62 @@ Cypress.Commands.add('filterCheck', (filter_index) => {
 // Selecionar primeiro cartão
 Cypress.Commands.add('selectFirst', () => {
     cy.get(':nth-child(1) > .base-card > .base-card__full-link').click()
+    cy.wait(1000)
+})
+
+// Verificar texto de resposta em inglês e português
+Cypress.Commands.add('checkTextLanguages', (element, ptbr, enus) => {
+    cy.get(element).invoke('text').then((text) => {
+        if (text.includes(enus)) {
+          cy.get(element).should('contain.text', enus)
+        }
+        else if (text.includes(ptbr)) {
+          cy.get(element).should('contain.text', ptbr)
+        }
+        else {
+          cy.get(element).should('contain.text', enus)
+        }
+      })
+})
+
+// Clicar na seção de cadastro 
+Cypress.Commands.add('joinIn', () => {
+    cy.get('.nav__button-tertiary').click()
+    cy.wait(1000)
+})
+
+// Entrar com as credencias do cadastro
+Cypress.Commands.add('enterCredentials', (email, password) => {
+    cy.get('#email-or-phone').type(email)
+    cy.wait(1000)
+    cy.get('#password').type(password)
+    cy.wait(1000)
+    cy.get('#join-form-submit').click()
+    cy.wait(1000)
+})
+
+// Entrar com o nome do cadastro
+Cypress.Commands.add('enterName', (firstName, lastName) => {
+    cy.get('#first-name').type(firstName)
+    cy.wait(1000)
+    cy.get('#last-name').type(lastName)
+    cy.wait(1000)
+    cy.get('#join-form-submit').click()
+    cy.wait(1000)
+})
+
+// Clicar na seção de login
+Cypress.Commands.add('singIn', () => {
+    cy.get('.nav__button-secondary').click()
+    cy.wait(1000)
+})
+
+// Entrando com as credencias de login
+Cypress.Commands.add('enterLoginCredentials', (username, password) => {
+    cy.get('#username').type(username)
+    cy.wait(1000)
+    cy.get('#password').type(password)
+    cy.wait(1000)
+    cy.get('.btn__primary--large').click()
     cy.wait(1000)
 })

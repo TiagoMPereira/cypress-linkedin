@@ -22,29 +22,30 @@ describe('Cenários de teste para página inicial e página de vagas do Linkedin
     cy.filterBR()
     cy.filterCheck(4)
     cy.selectFirst()
-    cy.get(':nth-child(2) > .description__job-criteria-text').should('contain.text', "Full-time")
+    cy.checkTextLanguages(':nth-child(2) > .description__job-criteria-text', "Tempo integral", "Full-time")
   })
 
+  it('Teste - Buscando vaga estágio', () => {
+    cy.linkedinVagas()
+    cy.filterBR()
+    cy.filterCheck(5)
+    cy.selectFirst()
+    cy.checkTextLanguages(':nth-child(1) > .description__job-criteria-text', "Estágio", "Internship")
+  })
 
+  it('Teste - Cadastro falho', () => {
+    cy.linkedin()
+    cy.joinIn()
+    cy.enterCredentials('galileu@gmail.com', '123456')
+    cy.enterName('Galileu', 'Galilei')
+    cy.checkTextLanguages('.toast__message', 'Insira uma senha com um nível maior de segurança.', "Please enter a more secure password")
+  })
+
+  it('Teste - Login com username inválido', () => {
+    cy.linkedin()
+    cy.singIn()
+    cy.enterLoginCredentials('skjdhvuirhbg', '1324587')
+    cy.checkTextLanguages('#error-for-username', "'Insira um nome de usuário válido", "Please enter a valid username")
+  })
+  
 })
-
-// function criarUsuario(){
-
-//   let horas = new Date().getHours().toString();
-//   let minutos = new Date().getMinutes().toString();
-//   let seg = new Date().getSeconds().toString()
-//   let user = horas + minutos + seg + 'Id'
-//   let senha = horas + minutos +seg + 'senha'
-//   let userInfo = [user, senha]
-
-//   cy.visit('https://globalsqa.com/angularJs-protractor/registration-login-example/#/login')
-//   cy.get('.btn-link').click()
-//   cy.get('#firstName').type(user)
-//   cy.get('#Text1').type(user)
-//   cy.get('#username').type(user)
-//   cy.get('#password').type(senha)
-//   cy.get('.btn-primary').click()
-//   cy.get('.ng-binding').should('contain.text', 'Registration successful')
-
-//   return userInfo
-// }
