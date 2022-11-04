@@ -35,10 +35,8 @@ describe('Cenários de teste para página inicial e página de vagas do Linkedin
 
   it('Teste - Cadastro falho', () => {
     cy.linkedin()
-    cy.joinIn()
-    cy.enterCredentials('galileu@gmail.com', '123456')
-    cy.enterName('Galileu', 'Galilei')
-    cy.checkTextLanguages('.toast__message', 'Insira uma senha com um nível maior de segurança.', "Please enter a more secure password")
+    cy.enterCredentialsHome('hrnvggdbidkjhs@gmail.com', '12345678')
+    cy.checkTextLanguages('#error-for-username', 'Não podemos encontrar uma conta do linkedin vinculada com esse email', "Couldn’t find a LinkedIn account associated with this email")
   })
 
   it('Teste - Login com username inválido', () => {
