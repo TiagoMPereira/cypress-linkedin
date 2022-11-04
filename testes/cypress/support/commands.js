@@ -87,27 +87,11 @@ Cypress.Commands.add('checkTextLanguages', (element, ptbr, enus) => {
       })
 })
 
-// Clicar na seção de cadastro 
-Cypress.Commands.add('joinIn', () => {
-    cy.get('.nav__button-tertiary').click()
-    cy.wait(1000)
-})
-
 // Entrar com as credencias do cadastro
 Cypress.Commands.add('enterCredentials', (email, password) => {
     cy.get('#email-or-phone').type(email)
     cy.wait(1000)
     cy.get('#password').type(password)
-    cy.wait(1000)
-    cy.get('#join-form-submit').click()
-    cy.wait(1000)
-})
-
-// Entrar com o nome do cadastro
-Cypress.Commands.add('enterName', (firstName, lastName) => {
-    cy.get('#first-name').type(firstName)
-    cy.wait(1000)
-    cy.get('#last-name').type(lastName)
     cy.wait(1000)
     cy.get('#join-form-submit').click()
     cy.wait(1000)
@@ -126,5 +110,15 @@ Cypress.Commands.add('enterLoginCredentials', (username, password) => {
     cy.get('#password').type(password)
     cy.wait(1000)
     cy.get('.btn__primary--large').click()
+    cy.wait(1000)
+})
+
+// Entrando com os dados na home
+Cypress.Commands.add('enterCredentialsHome', (email, password) => {
+    cy.get('#session_key').type(email)
+    cy.wait(1000)
+    cy.get('#session_password').type(password)
+    cy.wait(1000)
+    cy.get('.sign-in-form__submit-button').click()
     cy.wait(1000)
 })
